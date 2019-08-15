@@ -1,0 +1,4 @@
+
+development:
+    driver: mysql
+    open: root:root@/go_db
