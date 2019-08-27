@@ -34,11 +34,9 @@ services:
       context: . # Use an image built from the specified dockerfile in the current directory.
       dockerfile: docker/golang/Dockerfile
     ports:
-      - "3000:3000" # Forward the exposed port 8080 on the container to port 8080 on the host machine
       - "3001:3001" # Forward the exposed port 8080 on the container to port 8080 on the host machine
       - "3002:3002" # Forward the exposed port 8080 on the container to port 8080 on the host machine
     expose:
-    - "3000"
     - "3001"
     - "3002"
     command: gin --port 3002 run main.go #go run main.go

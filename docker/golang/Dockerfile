@@ -30,7 +30,6 @@ RUN go get github.com/codegangsta/gin
 RUN go get "github.com/go-sql-driver/mysql"
 RUN go get "github.com/Altoros/gorm-goose/cmd/gorm-goose"
 # Expose port 3001 to the outside world
-EXPOSE 3000
 EXPOSE 3001
 EXPOSE 3002
 CMD ["./main.go"]

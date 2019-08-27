@@ -6,6 +6,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
+// AppRoute ...
 type AppRoute struct {
 	u controllers.UserController
 }
@@ -13,7 +14,8 @@ type AppRoute struct {
 // Routes ... This function helps to maintain all the routes
 func (a *AppRoute) Routes(r *mux.Router) {
 	// simple web routes
-	r.HandleFunc("/", controllers.Welcome)
+	r.HandleFunc("/", controllers.ReactProduction)
+	r.HandleFunc("/welcome", controllers.Welcome)
 	//end
 
 	// Api routes

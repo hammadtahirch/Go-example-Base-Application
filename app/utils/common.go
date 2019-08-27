@@ -49,6 +49,17 @@ func LoadTemplate(files ...string) *View {
 	}
 }
 
+// LoadStaticTemplate ... This function helps to load the templates
+func LoadStaticTemplate(files ...string) *View {
+	t, err := template.ParseFiles(files...)
+	if err != nil {
+		panic(err)
+	}
+	return &View{
+		Template: t,
+	}
+}
+
 // GeneratePassword ... This function hepls to generate password
 func GeneratePassword(pwd string) string {
 	hash, err := bcrypt.GenerateFromPassword([]byte(pwd), bcrypt.DefaultCost)

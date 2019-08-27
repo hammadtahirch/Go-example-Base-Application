@@ -15,10 +15,10 @@ type MainApp struct {
 }
 
 func main() {
-
 	godotenv.Load()
 	m := MainApp{}
 	a := mux.NewRouter()
 	m.r.Routes(a)
-	http.ListenAndServe(os.Getenv("APP_PORT"), a)
+	a.PathPrefix("/public/").Handler(http.StripPrefix("/public/", http.FileServer(http.Dir("./public/"))))
+	http.ListenAndServe(":"+os.Getenv("APP_PORT"), a)
 }

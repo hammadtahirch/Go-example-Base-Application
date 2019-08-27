@@ -22,3 +22,13 @@ func Welcome(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 }
+
+// ReactProduction ... this function helps to load the welcome view
+func ReactProduction(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/html")
+	homeView := utils.LoadStaticTemplate("resources/views/react_build.gohtml")
+	err := homeView.Template.Execute(w, nil)
+	if err != nil {
+		panic(err)
+	}
+}
