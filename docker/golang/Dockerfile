@@ -12,20 +12,25 @@ WORKDIR /app
 RUN apt-get update
 RUN apt-get install vim -y
 
-# Install gin
-RUN go get github.com/codegangsta/gin
-# install golang driver for mysql
-RUN go get "github.com/go-sql-driver/mysql"
+# Copy go mod and sum files
+COPY go.mod go.sum ./
+
+# Download all dependancies. Dependencies will be cached if the go.mod and go.sum files are not changed
+RUN go mod download
 
 # Copy everything from the current directory to the Working Directory inside the container
-COPY . .
+COPY ./ /app
 
 # Build the Go app
 # RUN go build -o main .
+# Install gin
+RUN go get github.com/codegangsta/gin
 
-# Expose port 8080 to the outside world
+# install golang driver for mysql
+RUN go get "github.com/go-sql-driver/mysql"
+RUN go get "github.com/Altoros/gorm-goose/cmd/gorm-goose"
+# Expose port 3001 to the outside world
+EXPOSE 3000
 EXPOSE 3001
-
-# Command to run the executable
-# CMD ["./main"]
-CMD ["gin","-i","-a","3002","run","main.go"]
+EXPOSE 3002
+CMD ["./main.go"]

@@ -17,7 +17,7 @@ type WelcomeData struct {
 func Welcome(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
 	homeView := utils.LoadTemplate("resources/views/welcome.gohtml")
-	err := homeView.Template.Execute(w, &WelcomeData{Title: "Golang MVC11111", Description: "Welcome To Golang"})
+	err := homeView.Template.Execute(w, &WelcomeData{Title: "Golang MVC", Description: "Welcome To Golang"})
 	if err != nil {
 		panic(err)
 	}

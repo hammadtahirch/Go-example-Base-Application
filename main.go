@@ -9,11 +9,13 @@ import (
 	"github.com/joho/godotenv"
 )
 
+// MainApp ...
 type MainApp struct {
 	r routes.AppRoute
 }
 
 func main() {
+
 	godotenv.Load()
 	m := MainApp{}
 	a := mux.NewRouter()
