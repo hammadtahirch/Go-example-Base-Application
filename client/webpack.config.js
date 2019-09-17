@@ -44,7 +44,11 @@ module.exports = {
      ]
   },
   devServer: {
-    historyApiFallback: true,
+    historyApiFallback: false,
   },
-  plugins: [htmlWebpackPlugin]
+  plugins: [htmlWebpackPlugin],
+  watchOptions: {
+    aggregateTimeout: 300,
+    poll: 1000
+  }
 };

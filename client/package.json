@@ -1,14 +1,15 @@
 {
   "name": "client",
   "version": "1.0.0",
-  "description": "",
+  "description": "Golnag and react js integration using web ",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --port 2000 --mode development",
-    "build": "webpack --mode production"
+    "dev": "webpack-dev-server --open --inline --mode development --hot --port 2001 --host 0.0.0.0",
+    
+    "build": "webpack --config webpack.config.js --mode production"
   },
   "keywords": [],
-  "author": "",
+  "author": "Hammad Tahir <hammad.tahir.ch@gmail.com>",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.5.5",
@@ -25,6 +26,8 @@
     "webpack-dev-server": "^3.8.0"
   },
   "dependencies": {
+    "@material-ui/core": "^4.3.3",
+    "@material-ui/icons": "^4.2.1",
     "apollo-boost": "^0.4.4",
     "graphql": "^14.5.3",
     "react": "^16.9.0",

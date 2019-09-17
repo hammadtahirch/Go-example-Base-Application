@@ -1,5 +1,3 @@
-# Dockerfile References: https://docs.docker.com/engine/reference/builder/
-
 # Start from the latest golang base image
 FROM golang:latest
 
@@ -21,15 +19,14 @@ RUN go mod download
 # Copy everything from the current directory to the Working Directory inside the container
 COPY ./ /app
 
-# Build the Go app
-# RUN go build -o main .
 # Install gin
 RUN go get github.com/codegangsta/gin
 
 # install golang driver for mysql
 RUN go get "github.com/go-sql-driver/mysql"
 RUN go get "github.com/Altoros/gorm-goose/cmd/gorm-goose"
-# Expose port 3001 to the outside world
+
+# Expose port 3001,3002 to the outside world
 EXPOSE 3001
 EXPOSE 3002
 CMD ["./main.go"]
