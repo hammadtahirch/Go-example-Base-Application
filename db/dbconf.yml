@@ -1,4 +1,4 @@
 
 development:
     driver: mysql
-    open: root:root@tcp(golang-db:3306)/go_db
+    open: root:root@tcp(127.0.0.1:3306)/ride_share

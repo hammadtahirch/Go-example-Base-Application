@@ -16,6 +16,18 @@ type UserRepository struct {
 	db *gorm.DB
 }
 
+// CheckUserCridentails ... This function helps to getUsers.
+func (ur *UserRepository) CheckUserCridentails(muc models.UserCredentials) (models.User, error) {
+	mu := models.User{}
+	db := config.DBConnection()
+	er := db.Preload("Role").Model(&mu).Where("email = ?", muc.Username).Find(&mu).Error
+	if er != nil {
+		return mu, er
+	}
+	db.Close()
+	return mu, er
+}
+
 // GetUsersRepo ... This function helps to getUsers.
 func (ur *UserRepository) GetUsersRepo(filter map[string][]string) ([]models.User, error) {
 	var mu []models.User
@@ -28,74 +40,79 @@ func (ur *UserRepository) GetUsersRepo(filter map[string][]string) ([]models.Use
 	if filter["limit"] != nil {
 		limit, _ = strconv.Atoi(filter["limit"][0])
 	}
-
 	db := config.DBConnection()
-	db.LogMode(true)
 	res := db.Limit(limit).Offset(page * limit)
 	if filter["ids"] != nil {
 		ids = filter["ids"][0]
 		res = res.Where("id IN (?)", strings.Split(ids, ","))
 	}
-	res.Preload("Role").Find(&mu)
-	if res.Error != nil {
-		return mu, utils.New(res.Error.Error())
+	er := res.Preload("Role").Find(&mu).Error
+	if er != nil {
+		return mu, er
 	}
 	defer db.Close()
-	return mu, nil
+	return mu, er
 }
 
 // GetUserByIDRepo ... This function helps to get user by id
-func (ur *UserRepository) GetUserByIDRepo(id int) (models.User, error) {
+func (ur *UserRepository) GetUserByIDRepo(id int64) (models.User, error) {
 	mu := models.User{}
 	db := config.DBConnection()
-	res := db.Preload("Role").First(&mu, &models.User{ID: id})
-	if res.Error != nil {
-		return mu, utils.New(db.Error.Error())
+	er := db.Preload("Role").Where("id = ?", id).Find(&mu).Error
+	if er != nil {
+		return mu, er
 	}
 	db.Close()
-	return mu, nil
+	return mu, er
 }
 
 // StoreUserRepo ... This function helps to save user in storage.
 func (ur *UserRepository) StoreUserRepo(mu models.User) (models.User, error) {
 	db := config.DBConnection()
+	db.LogMode(true)
 	res := db.Save(&models.User{
-		Name:      mu.Name,
-		Email:     mu.Email,
-		Password:  utils.GeneratePassword(mu.Password),
-		RoleID:    mu.RoleID,
-		CreatedAt: time.Now(),
-		UpdatedAt: time.Now(),
+		Name:        mu.Name,
+		Email:       mu.Email,
+		Password:    utils.GeneratePassword(mu.Password),
+		PhoneNumber: mu.PhoneNumber,
+		RoleID:      mu.RoleID,
+		CreatedAt:   time.Now(),
+		UpdatedAt:   time.Now(),
 	})
-	res.Preload("Role").Find(&mu)
-	if res.Error != nil {
-		return mu, utils.New(res.Error.Error())
+	er := res.Preload("Role").Find(&mu).Error
+	if er != nil {
+		return mu, er
 	}
 	defer db.Close()
-	return mu, nil
+	return mu, er
 }
 
 // UpdateUserRepo ... This function helps to update user in storage
-func (ur *UserRepository) UpdateUserRepo(mu models.User, id int) (models.User, error) {
+func (ur *UserRepository) UpdateUserRepo(mu models.User, id int64) (models.User, error) {
 	db := config.DBConnection()
-	res := db.Model(&models.User{}).Where("id = ?", id).UpdateColumns(&models.User{Name: mu.Name, RoleID: mu.RoleID})
-	res.Preload("Role").Model(&models.User{}).Where("id=?", id).First(&mu)
-	if res.Error != nil {
-		return mu, utils.New(db.Error.Error())
+	res := db.Model(&models.User{}).Where("id = ?", id).UpdateColumns(
+		&models.User{
+			Name:        mu.Name,
+			RoleID:      mu.RoleID,
+			PhoneNumber: mu.PhoneNumber,
+		})
+	er := res.Preload("Role").Model(&models.User{}).Where("id=?", id).First(&mu).Error
+	if er != nil {
+		return mu, er
 	}
 	defer db.Close()
-	return mu, nil
+	return mu, er
 }
 
 // DestoryUserRepo ... This function helps to delete user from storege.
-func (ur *UserRepository) DestoryUserRepo(id int) (models.User, error) {
+func (ur *UserRepository) DestoryUserRepo(id int64) (models.User, error) {
 	mu := models.User{}
 	db := config.DBConnection()
 	res := db.Where("id = ?", id).Delete(&models.User{})
-	res.Unscoped().Preload("Role").Model(&mu).Where("id=? AND deleted_at IS NOT NULL", id).First(&mu)
-	if res.Error != nil {
-		return mu, utils.New(db.Error.Error())
+	er := res.Unscoped().Preload("Role").Model(&mu).Where("id=? AND deleted_at IS NOT NULL", id).First(&mu).Error
+	if er != nil {
+		return mu, er
 	}
 	defer db.Close()
-	return mu, nil
+	return mu, er
 }

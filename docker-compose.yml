@@ -34,7 +34,7 @@ services:
     expose:
     - "3001"
     - "3002"
-    command: gin --port 3002 run main.go
+    command: gin --port 3002 --all run
     volumes:
       - ./:/app
     restart: unless-stopped

@@ -19,12 +19,19 @@ func (a *AppRoute) Routes(r *mux.Router) {
 	//end
 
 	// Api routes
-	s := r.PathPrefix("/api/v1").Subrouter()
-	s.Use(middlewares.LoggingMiddleware)
-	s.HandleFunc("/user", a.u.IndexHandler).Methods("GET")
-	s.HandleFunc("/user/{id:[0-9]+}", a.u.ShowHandler).Methods("GET")
-	s.HandleFunc("/user", a.u.StoreHandler).Methods("POST")
-	s.HandleFunc("/user/{id:[0-9]+}", a.u.UpdateHandler).Methods("PUT")
-	s.HandleFunc("/user/{id:[0-9]+}", a.u.DestroyHandler).Methods("DELETE")
+	af := r.PathPrefix("/api/v1").Subrouter()
+	af.Use(middlewares.LoggingMiddleware)
+	af.HandleFunc("/signin", a.u.SignIn).Methods("POST")
+	af.HandleFunc("/recover-password", a.u.SignIn).Methods("POST")
+	af.HandleFunc("/registraion", a.u.SignIn).Methods("POST")
+	af.HandleFunc("/roles", a.u.SignIn).Methods("POST")
+
+	ar := r.PathPrefix("/api/v1").Subrouter()
+	ar.Use(middlewares.ValidateJwtMiddlewear)
+	ar.HandleFunc("/user", a.u.IndexHandler).Methods("GET")
+	ar.HandleFunc("/user/{id:[0-9]+}", a.u.ShowHandler).Methods("GET")
+	ar.HandleFunc("/user", a.u.StoreHandler).Methods("POST")
+	ar.HandleFunc("/user/{id:[0-9]+}", a.u.UpdateHandler).Methods("PUT")
+	ar.HandleFunc("/user/{id:[0-9]+}", a.u.DestroyHandler).Methods("DELETE")
 	// end
 }
