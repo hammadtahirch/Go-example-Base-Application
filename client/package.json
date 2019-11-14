@@ -4,8 +4,7 @@
   "description": "Golnag and react js integration using web ",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --open --inline --mode development --hot --port 2001 --host 0.0.0.0",
-    
+    "dev": "webpack-dev-server --open --inline --mode development --hot --port 2001 --host localhost",
     "build": "webpack --config webpack.config.js --mode production"
   },
   "keywords": [],
@@ -34,6 +33,7 @@
     "react-apollo": "^3.0.1",
     "react-dom": "^16.9.0",
     "react-loadable": "^5.5.0",
-    "react-router-dom": "^5.0.1"
+    "react-router-dom": "^5.1.2",
+    "recharts": "^1.7.1"
   }
 }

@@ -13,6 +13,7 @@ module.exports = {
     filename: 'app.js',
     // path: __dirname + '/dist'
     path: path.resolve(__dirname, '../public/build'),
+    publicPath: '/'
   },
   module: {
     rules: [
@@ -44,7 +45,7 @@ module.exports = {
      ]
   },
   devServer: {
-    historyApiFallback: false,
+    historyApiFallback: true,
   },
   plugins: [htmlWebpackPlugin],
   watchOptions: {

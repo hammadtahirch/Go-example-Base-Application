@@ -116,3 +116,18 @@ func (ur *UserRepository) DestoryUserRepo(id int64) (models.User, error) {
 	defer db.Close()
 	return mu, er
 }
+
+//RecoverPassword ... this func helps to take email and send reset password link
+func (ur *UserRepository) RecoverPassword() {
+	//todo: Add for Generate new password request
+}
+
+// NewPassord ... This func helps to change the password
+func (ur *UserRepository) NewPassord() {
+	//todo: add code to take new password and store it in storage
+}
+
+// Registration ... this func helps to take user information and store in storage
+func (ur *UserRepository) Registration() {
+	//todo: Add code to take user object and save to storage
+}

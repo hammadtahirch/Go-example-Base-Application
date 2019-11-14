@@ -2,7 +2,7 @@ package services
 
 import (
 	"git-lab.boldapps.net/nifty-logix/mvc/app/models"
-	"git-lab.boldapps.net/nifty-logix/mvc/app/repositories"
+	"git-lab.boldapps.net/nifty-logix/mvc/app/models/repositories"
 	"git-lab.boldapps.net/nifty-logix/mvc/app/utils"
 )
 
@@ -80,4 +80,19 @@ func (us *UserService) DestoryUserService(id int64) (models.User, models.Error) 
 		return res, l
 	}
 	return res, models.Error{}
+}
+
+//RecoverPassword ... this func helps to take email and send reset password link
+func (us *UserService) RecoverPassword() {
+	//todo: Add for Generate new password request
+}
+
+// NewPassord ... This func helps to change the password
+func (us *UserService) NewPassord() {
+	//todo: add code to take new password and store it in storage
+}
+
+// Registration ... this func helps to take user information and store in storage
+func (us *UserService) Registration() {
+	//todo: Add code to take user object and save to storage
 }

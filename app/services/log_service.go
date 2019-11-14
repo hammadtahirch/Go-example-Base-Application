@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"git-lab.boldapps.net/nifty-logix/mvc/app/models"
-	"git-lab.boldapps.net/nifty-logix/mvc/app/repositories"
+	"git-lab.boldapps.net/nifty-logix/mvc/app/models/repositories"
 )
 
 // LogService ... This struct helps to inject the dependency

@@ -16,7 +16,6 @@ import (
 // UserController ... This struct helps to inject the dependency
 type UserController struct {
 	us services.UserService
-	uc models.UserCredentials
 }
 
 // SignIn ... This function helps to generate token
@@ -144,4 +143,19 @@ func (uc *UserController) DestroyHandler(w http.ResponseWriter, r *http.Request)
 		return
 	}
 	utils.RespondJSON(w, 200, res, "user")
+}
+
+//RecoverPassword ... this func helps to take email and send reset password link
+func (uc *UserController) RecoverPassword(w http.ResponseWriter, r *http.Request) {
+	//todo: Add for Generate new password request
+}
+
+// NewPassord ... This func helps to change the password
+func (uc *UserController) NewPassord(w http.ResponseWriter, r *http.Request) {
+	//todo: add code to take new password and store it in storage
+}
+
+// Registration ... this func helps to take user information and store in storage
+func (uc *UserController) Registration(w http.ResponseWriter, r *http.Request) {
+	//todo: Add code to take user object and save to storage
 }
