@@ -19,7 +19,7 @@ type UserController struct {
 }
 
 // SignIn ... This function helps to generate token
-func (uc *UserController) SignIn(w http.ResponseWriter, r *http.Request) {
+func (uc UserController) SignIn(w http.ResponseWriter, r *http.Request) {
 	var c struct {
 		Payload models.UserCredentials `json:"user"`
 	}
@@ -48,7 +48,7 @@ func (uc *UserController) SignIn(w http.ResponseWriter, r *http.Request) {
 }
 
 // IndexHandler ... This function helps to get All records for storage
-func (uc *UserController) IndexHandler(w http.ResponseWriter, r *http.Request) {
+func (uc UserController) IndexHandler(w http.ResponseWriter, r *http.Request) {
 	parms := r.URL.Query()
 	res, err := uc.us.GetUsersService(parms)
 	if err.Code != 0 {
@@ -59,7 +59,7 @@ func (uc *UserController) IndexHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 // ShowHandler ... This function helps to get records by id
-func (uc *UserController) ShowHandler(w http.ResponseWriter, r *http.Request) {
+func (uc UserController) ShowHandler(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	id, _ := strconv.ParseInt(params["id"], 10, 64)
 	res, err := uc.us.GetUserByIDService(id)
@@ -71,7 +71,7 @@ func (uc *UserController) ShowHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 // StoreHandler ... This function helps to get store data in storage
-func (uc *UserController) StoreHandler(w http.ResponseWriter, r *http.Request) {
+func (uc UserController) StoreHandler(w http.ResponseWriter, r *http.Request) {
 
 	var p struct {
 		Payload models.User `json:"user"`
@@ -103,7 +103,7 @@ func (uc *UserController) StoreHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 // UpdateHandler ... This function helps to update data in storage using id
-func (uc *UserController) UpdateHandler(w http.ResponseWriter, r *http.Request) {
+func (uc UserController) UpdateHandler(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	id, _ := strconv.ParseInt(params["id"], 10, 64)
 	var p struct {
@@ -134,7 +134,7 @@ func (uc *UserController) UpdateHandler(w http.ResponseWriter, r *http.Request) 
 }
 
 // DestroyHandler ... This function helps to delete data from storage using id
-func (uc *UserController) DestroyHandler(w http.ResponseWriter, r *http.Request) {
+func (uc UserController) DestroyHandler(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	id, _ := strconv.ParseInt(params["id"], 10, 64)
 	res, err := uc.us.DestoryUserService(id)
@@ -146,16 +146,16 @@ func (uc *UserController) DestroyHandler(w http.ResponseWriter, r *http.Request)
 }
 
 //RecoverPassword ... this func helps to take email and send reset password link
-func (uc *UserController) RecoverPassword(w http.ResponseWriter, r *http.Request) {
+func (uc UserController) RecoverPassword(w http.ResponseWriter, r *http.Request) {
 	//todo: Add for Generate new password request
 }
 
 // NewPassord ... This func helps to change the password
-func (uc *UserController) NewPassord(w http.ResponseWriter, r *http.Request) {
+func (uc UserController) NewPassord(w http.ResponseWriter, r *http.Request) {
 	//todo: add code to take new password and store it in storage
 }
 
 // Registration ... this func helps to take user information and store in storage
-func (uc *UserController) Registration(w http.ResponseWriter, r *http.Request) {
+func (uc UserController) Registration(w http.ResponseWriter, r *http.Request) {
 	//todo: Add code to take user object and save to storage
 }

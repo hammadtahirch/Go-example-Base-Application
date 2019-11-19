@@ -2,6 +2,8 @@ package services
 
 import (
 	"fmt"
+	"os"
+	"strconv"
 
 	"git-lab.boldapps.net/nifty-logix/mvc/app/models"
 	"git-lab.boldapps.net/nifty-logix/mvc/app/models/repositories"
@@ -14,14 +16,21 @@ type LogService struct {
 
 // LogError This function helps to return and log errors
 func (l *LogService) LogError(Message string, SystemError string, Code int, dblog bool) models.Error {
+
 	er := models.Error{
 		SystemError: SystemError,
 		Code:        Code,
 		Message:     Message,
 	}
 	if dblog {
-		er, _ := l.ur.SaveError("Log", er)
-		fmt.Printf("%+v\n", er)
+
+		id, _ := l.ur.SaveError("Log", er)
+		fmt.Printf("%+v\n", id)
+		var ad, _ = strconv.ParseBool(os.Getenv("APP_DEBUG"))
+		er.ID = id
+		if os.Getenv("APP_ENV") == "production" && ad == false {
+			er.SystemError = "Site Working in production mood. See db logs"
+		}
 	}
 	return er
 }

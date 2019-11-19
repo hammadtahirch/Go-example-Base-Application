@@ -14,7 +14,8 @@ type Log struct {
 
 //Error This will help to save error stuff
 type Error struct {
-	SystemError string
-	Code        int
-	Message     string
+	ID          int64  `json:"id"`
+	SystemError string `json:"system_error"`
+	Code        int    `json:"code"`
+	Message     string `json:"message"`
 }

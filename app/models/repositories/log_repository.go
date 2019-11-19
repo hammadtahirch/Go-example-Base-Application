@@ -28,7 +28,7 @@ func (lr *LogRepository) SaveError(l string, me models.Error) (int64, error) {
 	db := config.DBConnection()
 	er := db.Save(s).Find(s).Error
 	if er != nil {
-		return 0, er
+		return s.ID, er
 	}
 	return s.ID, er
 }

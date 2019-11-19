@@ -1,4 +1,4 @@
 
 development:
     driver: mysql
-    open: root:root@tcp(golang-db:3306)/golang_db
+    open: root:root@tcp(golang-db:3306)/go_db

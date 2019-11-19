@@ -17,19 +17,19 @@ type UserRepository struct {
 }
 
 // CheckUserCridentails ... This function helps to getUsers.
-func (ur *UserRepository) CheckUserCridentails(muc models.UserCredentials) (models.User, error) {
+func (ur UserRepository) CheckUserCridentails(muc models.UserCredentials) (models.User, error) {
 	mu := models.User{}
-	db := config.DBConnection()
-	er := db.Preload("Role").Model(&mu).Where("email = ?", muc.Username).Find(&mu).Error
+	ur.db = config.DBConnection()
+	er := ur.db.Preload("Role").Model(&mu).Where("email = ?", muc.Username).Find(&mu).Error
 	if er != nil {
 		return mu, er
 	}
-	db.Close()
+	ur.db.Close()
 	return mu, er
 }
 
 // GetUsersRepo ... This function helps to getUsers.
-func (ur *UserRepository) GetUsersRepo(filter map[string][]string) ([]models.User, error) {
+func (ur UserRepository) GetUsersRepo(filter map[string][]string) ([]models.User, error) {
 	var mu []models.User
 	var ids string
 	limit, page := 5, 1
@@ -40,8 +40,8 @@ func (ur *UserRepository) GetUsersRepo(filter map[string][]string) ([]models.Use
 	if filter["limit"] != nil {
 		limit, _ = strconv.Atoi(filter["limit"][0])
 	}
-	db := config.DBConnection()
-	res := db.Limit(limit).Offset(page * limit)
+	ur.db = config.DBConnection()
+	res := ur.db.Limit(limit).Offset(page * limit)
 	if filter["ids"] != nil {
 		ids = filter["ids"][0]
 		res = res.Where("id IN (?)", strings.Split(ids, ","))
@@ -50,27 +50,27 @@ func (ur *UserRepository) GetUsersRepo(filter map[string][]string) ([]models.Use
 	if er != nil {
 		return mu, er
 	}
-	defer db.Close()
+	defer ur.db.Close()
 	return mu, er
 }
 
 // GetUserByIDRepo ... This function helps to get user by id
-func (ur *UserRepository) GetUserByIDRepo(id int64) (models.User, error) {
+func (ur UserRepository) GetUserByIDRepo(id int64) (models.User, error) {
 	mu := models.User{}
-	db := config.DBConnection()
-	er := db.Preload("Role").Where("id = ?", id).Find(&mu).Error
+	ur.db = config.DBConnection()
+	er := ur.db.Preload("Role").Where("id = ?", id).Find(&mu).Error
 	if er != nil {
 		return mu, er
 	}
-	db.Close()
+	ur.db.Close()
 	return mu, er
 }
 
 // StoreUserRepo ... This function helps to save user in storage.
-func (ur *UserRepository) StoreUserRepo(mu models.User) (models.User, error) {
-	db := config.DBConnection()
-	db.LogMode(true)
-	res := db.Save(&models.User{
+func (ur UserRepository) StoreUserRepo(mu models.User) (models.User, error) {
+	ur.db = config.DBConnection()
+	ur.db.LogMode(true)
+	res := ur.db.Save(&models.User{
 		Name:        mu.Name,
 		Email:       mu.Email,
 		Password:    utils.GeneratePassword(mu.Password),
@@ -83,14 +83,14 @@ func (ur *UserRepository) StoreUserRepo(mu models.User) (models.User, error) {
 	if er != nil {
 		return mu, er
 	}
-	defer db.Close()
+	defer ur.db.Close()
 	return mu, er
 }
 
 // UpdateUserRepo ... This function helps to update user in storage
-func (ur *UserRepository) UpdateUserRepo(mu models.User, id int64) (models.User, error) {
-	db := config.DBConnection()
-	res := db.Model(&models.User{}).Where("id = ?", id).UpdateColumns(
+func (ur UserRepository) UpdateUserRepo(mu models.User, id int64) (models.User, error) {
+	ur.db = config.DBConnection()
+	res := ur.db.Model(&models.User{}).Where("id = ?", id).UpdateColumns(
 		&models.User{
 			Name:        mu.Name,
 			RoleID:      mu.RoleID,
@@ -100,34 +100,34 @@ func (ur *UserRepository) UpdateUserRepo(mu models.User, id int64) (models.User,
 	if er != nil {
 		return mu, er
 	}
-	defer db.Close()
+	defer ur.db.Close()
 	return mu, er
 }
 
 // DestoryUserRepo ... This function helps to delete user from storege.
-func (ur *UserRepository) DestoryUserRepo(id int64) (models.User, error) {
+func (ur UserRepository) DestoryUserRepo(id int64) (models.User, error) {
 	mu := models.User{}
-	db := config.DBConnection()
-	res := db.Where("id = ?", id).Delete(&models.User{})
+	ur.db = config.DBConnection()
+	res := ur.db.Where("id = ?", id).Delete(&models.User{})
 	er := res.Unscoped().Preload("Role").Model(&mu).Where("id=? AND deleted_at IS NOT NULL", id).First(&mu).Error
 	if er != nil {
 		return mu, er
 	}
-	defer db.Close()
+	defer ur.db.Close()
 	return mu, er
 }
 
 //RecoverPassword ... this func helps to take email and send reset password link
-func (ur *UserRepository) RecoverPassword() {
+func (ur UserRepository) RecoverPassword() {
 	//todo: Add for Generate new password request
 }
 
 // NewPassord ... This func helps to change the password
-func (ur *UserRepository) NewPassord() {
+func (ur UserRepository) NewPassord() {
 	//todo: add code to take new password and store it in storage
 }
 
 // Registration ... this func helps to take user information and store in storage
-func (ur *UserRepository) Registration() {
+func (ur UserRepository) Registration() {
 	//todo: Add code to take user object and save to storage
 }
