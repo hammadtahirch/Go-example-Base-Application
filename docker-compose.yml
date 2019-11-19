@@ -33,8 +33,6 @@ services:
       - "3002:3002"
     expose:
     - "3001"
-    - "3002"
-    command: gin --port 3002 --all run
     volumes:
       - ./:/app
     restart: unless-stopped

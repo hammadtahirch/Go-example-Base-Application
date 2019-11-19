@@ -8,7 +8,7 @@ LABEL maintainer="Hammad Tahir <hammad.tahir.ch@gmail.com>"
 WORKDIR /app
 
 RUN apt-get update
-RUN apt-get install vim -y
+RUN apt-get install nano -y
 
 # Copy go mod and sum files
 COPY go.mod go.sum ./
@@ -25,8 +25,10 @@ RUN go get github.com/codegangsta/gin
 # install golang driver for mysql
 RUN go get "github.com/go-sql-driver/mysql"
 RUN go get "github.com/Altoros/gorm-goose/cmd/gorm-goose"
+RUN go get "github.com/githubnemo/CompileDaemon"
 
-# Expose port 3001,3002 to the outside world
+# Expose port 3001 to the outside world
 EXPOSE 3001
-EXPOSE 3002
-CMD ["./main.go"]
+
+
+ENTRYPOINT CompileDaemon --build="go build main.go" --command=./main

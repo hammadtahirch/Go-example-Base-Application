@@ -7,6 +7,9 @@ LABEL key="Hammad Tahir <hammad.tahir.ch@gmail.com>"
 # set working directory
 WORKDIR /app
 
+RUN apt-get update
+RUN apt-get install nano -y
+
 # add `/app/node_modules/.bin` to $PATH
 ENV PATH /app/node_modules/.bin:$PATH
 
