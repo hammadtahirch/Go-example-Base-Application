@@ -23,7 +23,7 @@ type DependencyInjection struct {
 }
 
 // ValidateJwtMiddlewear ... This function helps to log the stuff
-func (di DependencyInjection) ValidateJwtMiddlewear(next http.Handler) http.Handler {
+func ValidateJwtMiddlewear(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
 		authToken := r.Header.Get("Authorization")
