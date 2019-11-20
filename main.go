@@ -9,14 +9,15 @@ import (
 	"github.com/joho/godotenv"
 )
 
-// MainApp ...
-type MainApp struct {
+// AppRoute ...
+type AppRoute struct {
 	r routes.AppRoute
 }
 
+// main ...
 func main() {
 	godotenv.Load()
-	m := MainApp{}
+	m := AppRoute{}
 	a := mux.NewRouter()
 	m.r.Routes(a)
 	a.PathPrefix("/public/").Handler(http.StripPrefix("/public/", http.FileServer(http.Dir("./public/"))))
