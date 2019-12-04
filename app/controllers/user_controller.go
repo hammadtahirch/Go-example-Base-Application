@@ -157,5 +157,61 @@ func (uc UserController) NewPassord(w http.ResponseWriter, r *http.Request) {
 
 // Registration ... this func helps to take user information and store in storage
 func (uc UserController) Registration(w http.ResponseWriter, r *http.Request) {
+
+	var p struct {
+		Payload models.User `json:"user"`
+	}
+
+	if err := json.NewDecoder(r.Body).Decode(&p); err != nil {
+		utils.RespondJSON(w, 500, "Json error", "error")
+		return
+	}
+	//validation
+	er := validation.Errors{
+		"name":         validation.Validate(p.Payload.Name, validation.Required.Error("UH-HO! Name is required.")),
+		"email":        validation.Validate(p.Payload.Email, validation.Required.Error("UH-HO! Email is required."), is.Email.Error("UH-HO! Email is not required.")),
+		"password":     validation.Validate(p.Payload.Password, validation.Required.Error("UH-HO! Password is required."), validation.Length(8, 16).Error("UH-HO! Passord Should be 8 to 16 characters."), is.UTFLetterNumeric.Error("UH-HO! Password mush contain alphanumaric characters.")),
+		"phone_number": validation.Validate(p.Payload.PhoneNumber, validation.Required.Error("UH-HO! Phone number is required."), is.E164.Error("UH-HO! Phone number is not correct.")),
+		"role_id":      validation.Validate(p.Payload.RoleID, validation.Required.Error("UH-HO! Role is required.")),
+	}.Filter()
+	if er != nil {
+		utils.RespondJSON(w, 422, er, "error")
+		return
+	}
+	//validation
+	res, err := uc.us.StoreUserService(p.Payload)
+	if err.Code != 0 {
+		utils.RespondJSON(w, err.Code, err, "error")
+		return
+	}
+	utils.RespondJSON(w, 200, res, "user")
+
 	//todo: Add code to take user object and save to storage
+	// var cnf = config.Config{
+	// 	Broker:        "redis://redis-container:6379",
+	// 	ResultBackend: "redis://redis-container:6379",
+	// }
+
+	// server, err := machinery.NewServer(&cnf)
+	// if err != nil {
+	// 	//todo: add error handling
+	// }
+
+	// signature := &tasks.Signature{
+	// 	Name: "Say",
+	// 	Args: []tasks.Arg{
+	// 		{
+	// 			Type:  "string",
+	// 			Value: "Hammad",
+	// 		},
+	// 	},
+	// }
+	// eta := time.Now().UTC().Add(time.Second * 60)
+	// signature.ETA = &eta
+	// asyncResult, err := server.SendTask(signature)
+	// if err != nil {
+	// 	// failed to send the task
+	// 	// do something with the error
+	// }
+	// println(asyncResult)
 }
