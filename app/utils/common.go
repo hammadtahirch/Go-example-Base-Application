@@ -7,7 +7,7 @@ import (
 	"text/template"
 	"time"
 
-	"git-lab.boldapps.net/nifty-logix/mvc/app/models"
+	"github.com/hammadtahirch/golang_basic_app/app/models"
 	"github.com/dgrijalva/jwt-go"
 	"golang.org/x/crypto/bcrypt"
 )

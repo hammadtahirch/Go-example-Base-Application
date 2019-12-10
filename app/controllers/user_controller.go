@@ -6,9 +6,9 @@ import (
 	"strconv"
 	"time"
 
-	"git-lab.boldapps.net/nifty-logix/mvc/app/models"
-	"git-lab.boldapps.net/nifty-logix/mvc/app/services"
-	"git-lab.boldapps.net/nifty-logix/mvc/app/utils"
+	"github.com/hammadtahirch/golang_basic_app/app/models"
+	"github.com/hammadtahirch/golang_basic_app/app/services"
+	"github.com/hammadtahirch/golang_basic_app/app/utils"
 	"github.com/RichardKnop/machinery/v1"
 	"github.com/RichardKnop/machinery/v1/config"
 	"github.com/RichardKnop/machinery/v1/tasks"

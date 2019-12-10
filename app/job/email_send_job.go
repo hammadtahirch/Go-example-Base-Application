@@ -1,6 +1,6 @@
 package main
 
-import "git-lab.boldapps.net/nifty-logix/mvc/app/services"
+import "github.com/hammadtahirch/golang_basic_app/app/services"
 
 //SendEmailJob ...
 func SendEmailJob(email string) (string, error) {

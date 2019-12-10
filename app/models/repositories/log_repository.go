@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"git-lab.boldapps.net/nifty-logix/mvc/app/models"
-	"git-lab.boldapps.net/nifty-logix/mvc/config"
+	"github.com/hammadtahirch/golang_basic_app/app/models"
+	"github.com/hammadtahirch/golang_basic_app/config"
 	"github.com/jinzhu/gorm"
 )
 
