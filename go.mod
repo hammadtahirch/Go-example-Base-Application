@@ -1,4 +1,4 @@
-module git-lab.boldapps.net/nifty-logix/mvc
+module github.com/hammadtahirch/golang_basic_app
 
 go 1.12
 
