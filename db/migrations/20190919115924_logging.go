@@ -1,4 +1,4 @@
-package main
+package migration
 
 import (
 	"github.com/hammadtahirch/golang_basic_app/app/models"
