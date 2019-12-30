@@ -1,8 +1,8 @@
 package routes
 
 import (
-	"git-lab.boldapps.net/nifty-logix/mvc/app/controllers"
-	"git-lab.boldapps.net/nifty-logix/mvc/app/middlewares"
+	"github.com/hammadtahirch/golang_basic_app/app/controllers"
+	"github.com/hammadtahirch/golang_basic_app/app/middlewares"
 	"github.com/gorilla/mux"
 )
 

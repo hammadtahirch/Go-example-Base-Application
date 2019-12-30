@@ -1,9 +1,9 @@
 package services
 
 import (
-	"git-lab.boldapps.net/nifty-logix/mvc/app/models"
-	"git-lab.boldapps.net/nifty-logix/mvc/app/models/repositories"
-	"git-lab.boldapps.net/nifty-logix/mvc/app/utils"
+	"github.com/hammadtahirch/golang_basic_app/app/models"
+	"github.com/hammadtahirch/golang_basic_app/app/models/repositories"
+	"github.com/hammadtahirch/golang_basic_app/app/utils"
 )
 
 // UserService ... This struct helps to inject the dependency

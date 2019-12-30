@@ -3,7 +3,7 @@ package controllers
 import (
 	"net/http"
 
-	"git-lab.boldapps.net/nifty-logix/mvc/app/services"
+	"github.com/hammadtahirch/golang_basic_app/app/services"
 )
 
 //RoleController ... This helps to defind the dependencies.

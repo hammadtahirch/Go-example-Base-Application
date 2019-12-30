@@ -3,7 +3,7 @@ package controllers
 import (
 	"net/http"
 
-	"git-lab.boldapps.net/nifty-logix/mvc/app/utils"
+	"github.com/hammadtahirch/golang_basic_app/app/utils"
 )
 
 // WelcomeData ... This is the demo structure for new learners

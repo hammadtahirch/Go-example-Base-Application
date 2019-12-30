@@ -1,7 +1,7 @@
 package main
 
 import (
-	"git-lab.boldapps.net/nifty-logix/mvc/app/models"
+	"github.com/hammadtahirch/golang_basic_app/app/models"
 	"github.com/jinzhu/gorm"
 )
 
