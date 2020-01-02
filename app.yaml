@@ -1,5 +1,0 @@
-runtime: go112  # or go112 for the Go 1.12 runtime
-
-handlers:
-- url: /.*
-  script: auto

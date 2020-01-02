@@ -1,4 +1,4 @@
-module github.com/hammadtahirch/golang_basic_app
+module github.com/hammadtahirch/nifty_logix
 
 go 1.12
 

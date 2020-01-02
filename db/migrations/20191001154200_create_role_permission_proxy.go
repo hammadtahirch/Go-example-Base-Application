@@ -1,7 +1,7 @@
 package migration
 
 import (
-	"github.com/hammadtahirch/golang_basic_app/app/models"
+	"github.com/hammadtahirch/nifty_logix/app/models"
 	"github.com/jinzhu/gorm"
 )
 

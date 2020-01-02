@@ -5,8 +5,8 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/hammadtahirch/golang_basic_app/app/models"
-	"github.com/hammadtahirch/golang_basic_app/app/models/repositories"
+	"github.com/hammadtahirch/nifty_logix/app/models"
+	"github.com/hammadtahirch/nifty_logix/app/models/repositories"
 )
 
 // LogService ... This struct helps to inject the dependency

@@ -6,8 +6,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/hammadtahirch/golang_basic_app/app/services"
-	"github.com/hammadtahirch/golang_basic_app/app/utils"
+	"github.com/hammadtahirch/nifty_logix/app/services"
+	"github.com/hammadtahirch/nifty_logix/app/utils"
 	"github.com/dgrijalva/jwt-go"
 )
 

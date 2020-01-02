@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/hammadtahirch/golang_basic_app/routes"
+	"github.com/hammadtahirch/nifty_logix/routes"
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 )

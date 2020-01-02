@@ -1,1 +1,1 @@
-# golang_basic_app
+# nifty_logix

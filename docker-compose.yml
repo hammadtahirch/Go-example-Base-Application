@@ -4,7 +4,7 @@ services:
   #MySQL Service
   db:
     image: mysql:5.7.22
-    container_name: golang-db
+    container_name: nifty-logix-db
     restart: unless-stopped
     tty: true
     ports:
@@ -24,7 +24,7 @@ services:
 
   # App Service
   app:
-    container_name: golang-app
+    container_name: nifty-logix-app
     build:
       context: .
       dockerfile: docker/golang/Dockerfile
@@ -45,7 +45,7 @@ services:
   
   #webpack node
   client:
-    container_name: golang_client
+    container_name: nifty-logix-client
     build:
       context: .
       dockerfile: docker/webpack_npm/Dockerfile
@@ -65,7 +65,7 @@ services:
   redis:
     image: "redis:alpine" # Use a public Redis image to build the redis service    
     restart: unless-stopped
-    container_name: redis-container
+    container_name: nifty-logix-redis
     ports:
     - "63791:6379"
     expose:

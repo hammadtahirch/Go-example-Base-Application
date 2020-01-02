@@ -3,7 +3,7 @@ package main
 import (
 	machinery "github.com/RichardKnop/machinery/v1"
 	"github.com/RichardKnop/machinery/v1/config"
-	"github.com/hammadtahirch/golang_basic_app/app/services"
+	"github.com/hammadtahirch/nifty_logix/app/services"
 )
 
 func main() {

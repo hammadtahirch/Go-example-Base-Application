@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/hammadtahirch/golang_basic_app/app/models"
-	"github.com/hammadtahirch/golang_basic_app/config"
+	"github.com/hammadtahirch/nifty_logix/app/models"
+	"github.com/hammadtahirch/nifty_logix/config"
 	"github.com/jinzhu/gorm"
 )
 

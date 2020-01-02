@@ -1,9 +1,9 @@
 package services
 
 import (
-	"github.com/hammadtahirch/golang_basic_app/app/models"
-	"github.com/hammadtahirch/golang_basic_app/app/models/repositories"
-	"github.com/hammadtahirch/golang_basic_app/app/utils"
+	"github.com/hammadtahirch/nifty_logix/app/models"
+	"github.com/hammadtahirch/nifty_logix/app/models/repositories"
+	"github.com/hammadtahirch/nifty_logix/app/utils"
 )
 
 // UserService ... This struct helps to inject the dependency
