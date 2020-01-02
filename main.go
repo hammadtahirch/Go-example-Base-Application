@@ -4,13 +4,19 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/hammadtahirch/nifty_logix/app/utils"
 	"github.com/hammadtahirch/nifty_logix/routes"
-	"github.com/russross/blackfriday"
 )
 
 // AppRoute ...
 type AppRoute struct {
 	r routes.AppRoute
+}
+
+// WelcomeData ... This is the demo structure for new learners
+type WelcomeData struct {
+	Title       string
+	Description string
 }
 
 func main() {
@@ -19,14 +25,18 @@ func main() {
 		port = "8080"
 	}
 
-	http.HandleFunc("/markdown", GenerateMarkdown)
+	http.HandleFunc("/markdown", Welcome)
 	http.Handle("/", http.FileServer(http.Dir("public")))
 	http.ListenAndServe(":"+port, nil)
 }
 
-func GenerateMarkdown(rw http.ResponseWriter, r *http.Request) {
-	markdown := blackfriday.MarkdownCommon([]byte(r.FormValue("body")))
-	rw.Write(markdown)
+func Welcome(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/html")
+	homeView := utils.LoadTemplate("resources/views/welcome.gohtml")
+	err := homeView.Template.Execute(w, &WelcomeData{Title: "Golang MVC", Description: "Welcome To Golang"})
+	if err != nil {
+		panic(err)
+	}
 }
 
 // main ...
