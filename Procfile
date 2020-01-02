@@ -1,1 +1,1 @@
-web: nifty-logix
+web: bin/nifty-logix
