@@ -26,7 +26,7 @@ func main() {
 	}
 
 	http.HandleFunc("/markdown", Welcome)
-	http.Handle("/", http.FileServer(http.Dir("public")))
+	http.HandleFunc("/", Welcome)
 	http.ListenAndServe(":"+port, nil)
 }
 
