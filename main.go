@@ -4,8 +4,9 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/hammadtahirch/nifty_logix/app/utils"
+	"github.com/gorilla/mux"
 	"github.com/hammadtahirch/nifty_logix/routes"
+	"github.com/joho/godotenv"
 )
 
 // AppRoute ...
@@ -13,38 +14,16 @@ type AppRoute struct {
 	r routes.AppRoute
 }
 
-// WelcomeData ... This is the demo structure for new learners
-type WelcomeData struct {
-	Title       string
-	Description string
-}
-
+// main ...
 func main() {
+	godotenv.Load()
+	m := AppRoute{}
+	a := mux.NewRouter()
+	m.r.Routes(a)
+	a.PathPrefix("/public/").Handler(http.StripPrefix("/public/", http.FileServer(http.Dir("./public/"))))
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = "8080"
+		port = "8000"
 	}
-
-	http.HandleFunc("/markdown", Welcome)
-	http.HandleFunc("/", Welcome)
-	http.ListenAndServe(":"+port, nil)
+	http.ListenAndServe(":"+port, a)
 }
-
-func Welcome(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "text/html")
-	homeView := utils.LoadTemplate("resources/views/welcome.gohtml")
-	err := homeView.Template.Execute(w, &WelcomeData{Title: "Golang MVC", Description: "Welcome To Golang"})
-	if err != nil {
-		panic(err)
-	}
-}
-
-// main ...
-// func main() {
-// 	godotenv.Load()
-// 	m := AppRoute{}
-// 	a := mux.NewRouter()
-// 	m.r.Routes(a)
-// 	a.PathPrefix("/public/").Handler(http.StripPrefix("/public/", http.FileServer(http.Dir("./public/"))))
-// 	http.ListenAndServe(":"+os.Getenv("APP_PORT"), a)
-// }

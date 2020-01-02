@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"net/http"
+	"os"
 
 	"github.com/hammadtahirch/nifty_logix/app/utils"
 )
@@ -17,7 +18,7 @@ type WelcomeData struct {
 func Welcome(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
 	homeView := utils.LoadTemplate("resources/views/welcome.gohtml")
-	err := homeView.Template.Execute(w, &WelcomeData{Title: "Golang MVC", Description: "Welcome To Golang"})
+	err := homeView.Template.Execute(w, &WelcomeData{Title: "Golang MVC" + os.Getenv("PORT"), Description: "Welcome To Golang"})
 	if err != nil {
 		panic(err)
 	}
