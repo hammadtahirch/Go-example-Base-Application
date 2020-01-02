@@ -1,4 +1,2 @@
 /client/node_modules/
-public/build/
 main
-.env
