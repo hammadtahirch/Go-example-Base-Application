@@ -1,1 +1,1 @@
-web: nifty-logix -port 3001
+web: nifty-logix
