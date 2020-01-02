@@ -21,9 +21,9 @@ func main() {
 	a := mux.NewRouter()
 	m.r.Routes(a)
 	a.PathPrefix("/public/").Handler(http.StripPrefix("/public/", http.FileServer(http.Dir("./public/"))))
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8000"
+	port := os.Getenv("APP_PORT")
+	if port == "" && os.Getenv("APP_ENV") == "production" {
+		port = os.Getenv("PORT") // heroku does not define static port at the time of deployment so that why i kept if dynamic
 	}
 	http.ListenAndServe(":"+port, a)
 }
