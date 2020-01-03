@@ -19,9 +19,6 @@ RUN go mod download
 # Copy everything from the current directory to the Working Directory inside the container
 COPY ./ /app
 
-# Install gin
-RUN go get github.com/codegangsta/gin
-
 # install golang driver for mysql
 RUN go get "github.com/go-sql-driver/mysql"
 RUN go get "github.com/Altoros/gorm-goose/cmd/gorm-goose"
